@@ -91,6 +91,12 @@ func Int64ToString(val int64) string {
 	return ret
 }
 
+func Int32ToInt(value int32) int {
+	str :=string(value)
+	return StringToInt(str)
+}
+
+
 //把任意数字类型转换为int64
 func ToInt64(value interface{}) (d int64, err error) {
 	val := reflect.ValueOf(value)

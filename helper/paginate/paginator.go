@@ -13,7 +13,17 @@ type Paginator struct {
 	LastPage  int
 }
 
-func New(paged int, pageSize ...int) *Paginator {
+
+func New(paged int32, pageSize ...int32) *Paginator {
+	 p :=helper.Int32ToInt(paged)
+	 if pageSize !=nil {
+	 	s :=helper.Int32ToInt(pageSize[0])
+	 	return NewFromInt(p,s)
+	 }
+	 return NewFromInt(p)
+}
+
+func NewFromInt(paged int, pageSize ...int) *Paginator {
 	var psize int
 	if pageSize != nil {
 		if pageSize[0] > 0 {
