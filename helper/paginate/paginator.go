@@ -3,16 +3,16 @@ package paginate
 import "github.com/geiqin/gotools/helper"
 
 type Paginator struct {
-	Paged     int32
-	Total     int32
-	PageCount int32
-	PageSize  int32
-	PrevPage  int32
-	LastPage  int32
+	Paged     int
+	Total     int
+	PageCount int
+	PageSize  int
+	PrevPage  int
+	LastPage  int
 }
 
-func New(paged int32, pageSize ...int32) *Paginator {
-	var psize int32
+func New(paged int, pageSize ...int) *Paginator {
+	var psize int
 	if pageSize != nil {
 		if pageSize[0] > 0 {
 			psize = pageSize[0]
@@ -33,12 +33,12 @@ func New(paged int32, pageSize ...int32) *Paginator {
 	return entity
 }
 
-func (a *Paginator) Offset() int32 {
+func (a *Paginator) Offset() int {
 	offset := (a.Paged - 1) * a.PageSize
 	return offset
 }
 
-func (a *Paginator) Limit() int32 {
+func (a *Paginator) Limit() int {
 	return a.PageSize
 }
 
@@ -56,7 +56,7 @@ func (a *Paginator) ToPager(pbPager interface{}) *interface{} {
 	return &pbPager
 }
 
-func Top(top int32) int32 {
+func Top(top int) int {
 	if top > 0 {
 		return top
 	}
