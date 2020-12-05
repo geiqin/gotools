@@ -1,10 +1,12 @@
 package paginate
 
-import "github.com/geiqin/gotools/helper"
+import (
+	"github.com/geiqin/gotools/helper"
+)
 
 type Paginator struct {
 	Paged     int
-	Total     int
+	Total     int64
 	PageCount int
 	PageSize  int
 	PrevPage  int
@@ -33,6 +35,7 @@ func New(paged int, pageSize ...int) *Paginator {
 	return entity
 }
 
+
 func (a *Paginator) Offset() int {
 	offset := (a.Paged - 1) * a.PageSize
 	return offset
@@ -43,7 +46,8 @@ func (a *Paginator) Limit() int {
 }
 
 func (a *Paginator) ToPager(pbPager interface{}) *interface{} {
-	a.PageCount = (a.Total + a.PageSize - 1) / a.PageSize
+	t := helper.StringToInt(helper.Int64ToString(a.Total))
+	a.PageCount = (t +  a.PageSize - 1) / a.PageSize
 	a.LastPage = a.Paged + 1
 	a.PrevPage = a.Paged - 1
 	if a.LastPage > a.PageCount {
