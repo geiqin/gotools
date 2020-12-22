@@ -109,7 +109,7 @@ func Int32ToInt(value int32) int {
 }
 
 func IntToInt32(value int) int32 {
-	str :=string(value)
+	str :=IntToString(value)
 	return StringToInt32(str)
 }
 
