@@ -13,6 +13,16 @@ type Paginator struct {
 	LastPage  int
 }
 
+type paginatorWrap struct {
+	Paged     int32
+	Total     int32
+	PageCount int32
+	PageSize  int32
+	PrevPage  int32
+	LastPage  int32
+}
+
+
 
 func New(paged int32, pageSize ...int32) *Paginator {
 	 p :=helper.Int32ToInt(paged)
@@ -56,8 +66,12 @@ func (a *Paginator) Limit() int {
 }
 
 func (a *Paginator) ToPager(pbPager interface{}) *interface{} {
-	t := helper.StringToInt(helper.Int64ToString(a.Total))
-	a.PageCount = (t +  a.PageSize - 1) / a.PageSize
+	w:=&paginatorWrap{}
+	t := helper.StringToInt32(helper.Int64ToString(a.Total))
+	w.Total =t
+	w.PageSize = helper.IntToInt32(a.PageSize)
+	//t := helper.StringToInt(helper.Int64ToString(a.Total))
+	w.PageCount = (t +  w.PageSize - 1) / w.PageSize
 	a.LastPage = a.Paged + 1
 	a.PrevPage = a.Paged - 1
 	if a.LastPage > a.PageCount {
@@ -66,7 +80,8 @@ func (a *Paginator) ToPager(pbPager interface{}) *interface{} {
 	if a.PrevPage < 1 {
 		a.PrevPage = 1
 	}
-	helper.StructCopy(pbPager, a)
+
+	helper.StructCopy(pbPager, w)
 	return &pbPager
 }
 

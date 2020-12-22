@@ -76,6 +76,15 @@ func StringToInt(val string) int {
 	return ret
 }
 
+func StringToInt32(val string) int32 {
+	ret, err:= strconv.ParseInt(val,10,32)
+	if err == nil {
+		fmt.Printf("StringToInt32 convert failed ,value is :"+val)
+	}
+	return int32(ret)
+}
+
+
 func StringToInt64(val string) int64 {
 	ret, _ := strconv.ParseInt(val, 10, 64)
 	return ret
@@ -96,6 +105,10 @@ func Int32ToInt(value int32) int {
 	return StringToInt(str)
 }
 
+func IntToInt32(value int) int32 {
+	str :=string(value)
+	return StringToInt32(str)
+}
 
 //把任意数字类型转换为int64
 func ToInt64(value interface{}) (d int64, err error) {
