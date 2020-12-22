@@ -2,7 +2,6 @@ package paginate
 
 import (
 	"github.com/geiqin/gotools/helper"
-	"log"
 )
 
 type Paginator struct {
@@ -69,11 +68,9 @@ func (a *Paginator) Limit() int {
 func (a *Paginator) ToPager(pbPager interface{}) *interface{} {
 	w:=&paginatorWrap{}
 	v :=helper.Int64ToString(a.Total)
-	log.Println("ToPager total:",v)
 	t := helper.StringToInt32(v)
 	w.Total =t
 	w.PageSize = helper.IntToInt32(a.PageSize)
-	//t := helper.StringToInt(helper.Int64ToString(a.Total))
 	w.PageCount = (t +  w.PageSize - 1) / w.PageSize
 	a.LastPage = a.Paged + 1
 	a.PrevPage = a.Paged - 1
