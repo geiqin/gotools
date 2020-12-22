@@ -78,6 +78,7 @@ func StringToInt(val string) int {
 }
 
 func StringToInt32(val string) int32 {
+	log.Println("StringToInt32  value is :",val)
 	ret, err := strconv.ParseInt(val,10,32)
 	if err != nil {
 		log.Println("StringToInt32 convert failed ,value is :",val)
