@@ -18,6 +18,15 @@ func GetVal(name string, mps map[string]interface{}) interface{} {
 	return v
 }
 
+
+//生成id含前缀和后缀字符串
+func GetIdentityFlag(id int64,prefix string,suffix string) string {
+	flag := fmt.Sprintf("%08d", id)
+	flag = prefix + flag +suffix
+	return flag
+}
+
+
 func GenerateSn(prefix ...string) string {
 	sn := xhashes.FNV64(UniqueId())
 	snStr := strconv.FormatUint(sn, 10)
