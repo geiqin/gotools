@@ -131,7 +131,7 @@ func Int64ToString(val int64) string {
 }
 
 func Int32ToInt(value int32) int {
-	str :=string(value)
+	str :=Int64ToString(int64(value))
 	return StringToInt(str)
 }
 
