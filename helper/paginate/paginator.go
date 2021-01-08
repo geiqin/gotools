@@ -66,7 +66,7 @@ func (a *Paginator) Limit() int {
 }
 
 func (a *Paginator) ToPager(pbPager interface{}) *interface{} {
-	w:=&paginatorWrap{}
+	w:=&paginatorWrap{Paged: helper.IntToInt32(a.Paged)}
 	v :=helper.Int64ToString(a.Total)
 	t := helper.StringToInt32(v)
 	w.Total =t
