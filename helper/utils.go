@@ -9,6 +9,7 @@ import (
 	"math/rand"
 	"reflect"
 	"strconv"
+	"strings"
 	"time"
 )
 
@@ -36,6 +37,18 @@ func GenerateSn(prefix ...string) string {
 		snStr = prefix[0] + snStr
 	}
 	return snStr
+}
+//获取随机数字串（验证码常用）
+func GetRandomNumber(width int) string {
+	numeric := [10]byte{0,1,2,3,4,5,6,7,8,9}
+	r := len(numeric)
+	rand.Seed(time.Now().UnixNano())
+
+	var sb strings.Builder
+	for i := 0; i < width; i++ {
+		fmt.Fprintf(&sb, "%d", numeric[ rand.Intn(r) ])
+	}
+	return sb.String()
 }
 
 // 获取随机字符串
