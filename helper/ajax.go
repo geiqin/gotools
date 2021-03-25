@@ -59,6 +59,15 @@ func JsonData(who interface{}, err error) string {
 			}
 		}
 
+		params := elem.FieldByName("Params")
+		if params.IsValid() {
+			if !params.IsNil() {
+				ajax.Code = 1
+				ajax.Data = params.Interface()
+				return JsonEncode(ajax)
+			}
+		}
+
 		//分页数据和列表数据
 		pager := elem.FieldByName("Pager")
 		if pager.IsValid() {
