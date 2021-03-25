@@ -16,10 +16,10 @@ type pageData struct {
 	Items interface{} `json:"items,omitempty"`
 }
 
-func AjaxJson(who interface{}, err error) string {
+func JsonData(who interface{}, err error) string {
 	ajax := &ajaxData{}
 	pageData := &pageData{}
-	
+
 	if err != nil {
 		ajax.Code = 1000
 		ajax.Message = err.Error()
