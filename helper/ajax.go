@@ -12,8 +12,8 @@ type AjaxData struct {
 }
 
 type pageData struct {
-	Pager interface{} `json:"pager,omitempty"`
-	Items interface{} `json:"items,omitempty"`
+	Pager interface{} `json:"pager"`
+	Items interface{} `json:"items"`
 }
 
 func JsonData(who interface{}, err error) string {
