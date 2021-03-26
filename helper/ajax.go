@@ -5,7 +5,7 @@ import (
 	"reflect"
 )
 
-type ajaxData struct {
+type AjaxData struct {
 	Code    int64       `json:"code"`              //错误代码: 成功：1 ，其它数字为失败
 	Message string      `json:"message,omitempty"` //错误消息
 	Data    interface{} `json:"data,omitempty"`    //成功数据
@@ -17,11 +17,11 @@ type pageData struct {
 }
 
 func JsonData(who interface{}, err error) string {
-	ajax := &ajaxData{}
+	ajax := &AjaxData{}
 	pageData := &pageData{}
 
 	if err != nil {
-		ajax.Code = 1000
+		ajax.Code = 400
 		ajax.Message = err.Error()
 	}
 
