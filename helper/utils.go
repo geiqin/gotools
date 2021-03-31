@@ -67,29 +67,6 @@ func GetRandomString(length int) string {
 	return string(result)
 }
 
-// 将任意类型转string
-func ToString(v interface{}) string {
-	if v == nil {
-		return ""
-	}
-	switch d := v.(type) {
-	case string:
-		return d
-	case int, int8, int16, int32, int64:
-		return strconv.FormatInt(reflect.ValueOf(v).Int(), 10)
-	case uint, uint8, uint16, uint32, uint64:
-		return strconv.FormatUint(reflect.ValueOf(v).Uint(), 10)
-	case []byte:
-		return string(d)
-	case float32, float64:
-		return strconv.FormatFloat(reflect.ValueOf(v).Float(), 'f', -1, 64)
-	case bool:
-		return strconv.FormatBool(d)
-	default:
-		return fmt.Sprint(v)
-	}
-}
-
 /*
 //把汉字转换未Pinyin
 func ConvertPinyin(chinese string, mode ...int) string {
@@ -172,6 +149,29 @@ func Int32ToInt(value int32) int {
 func IntToInt32(value int) int32 {
 	str := IntToString(value)
 	return StringToInt32(str)
+}
+
+// 将任意类型转string
+func ToString(v interface{}) string {
+	if v == nil {
+		return ""
+	}
+	switch d := v.(type) {
+	case string:
+		return d
+	case int, int8, int16, int32, int64:
+		return strconv.FormatInt(reflect.ValueOf(v).Int(), 10)
+	case uint, uint8, uint16, uint32, uint64:
+		return strconv.FormatUint(reflect.ValueOf(v).Uint(), 10)
+	case []byte:
+		return string(d)
+	case float32, float64:
+		return strconv.FormatFloat(reflect.ValueOf(v).Float(), 'f', -1, 64)
+	case bool:
+		return strconv.FormatBool(d)
+	default:
+		return fmt.Sprint(v)
+	}
 }
 
 //把任意数字类型转换为int64
