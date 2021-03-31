@@ -21,14 +21,12 @@ func GetVal(name string, mps map[string]interface{}) interface{} {
 	return v
 }
 
-
 //生成id含前缀和后缀字符串
-func GetIdentityFlag(id int64,prefix string,suffix string) string {
+func GetIdentityFlag(id int64, prefix string, suffix string) string {
 	flag := fmt.Sprintf("%08d", id)
-	flag = prefix + flag +suffix
+	flag = prefix + flag + suffix
 	return flag
 }
-
 
 func GenerateSn(prefix ...string) string {
 	sn := xhashes.FNV64(UniqueId())
@@ -38,15 +36,16 @@ func GenerateSn(prefix ...string) string {
 	}
 	return snStr
 }
+
 //获取随机数字串（验证码常用）
 func GetRandomNumber(width int) string {
-	numeric := [10]byte{0,1,2,3,4,5,6,7,8,9}
+	numeric := [10]byte{0, 1, 2, 3, 4, 5, 6, 7, 8, 9}
 	r := len(numeric)
 	rand.Seed(time.Now().UnixNano())
 
 	var sb strings.Builder
 	for i := 0; i < width; i++ {
-		fmt.Fprintf(&sb, "%d", numeric[ rand.Intn(r) ])
+		fmt.Fprintf(&sb, "%d", numeric[rand.Intn(r)])
 	}
 	return sb.String()
 }
@@ -66,6 +65,29 @@ func GetRandomString(length int) string {
 		result = append(result, b[r.Intn(len(b))])
 	}
 	return string(result)
+}
+
+// 将任意类型转string
+func ToString(v interface{}) string {
+	if v == nil {
+		return ""
+	}
+	switch d := v.(type) {
+	case string:
+		return d
+	case int, int8, int16, int32, int64:
+		return strconv.FormatInt(reflect.ValueOf(v).Int(), 10)
+	case uint, uint8, uint16, uint32, uint64:
+		return strconv.FormatUint(reflect.ValueOf(v).Uint(), 10)
+	case []byte:
+		return string(d)
+	case float32, float64:
+		return strconv.FormatFloat(reflect.ValueOf(v).Float(), 'f', -1, 64)
+	case bool:
+		return strconv.FormatBool(d)
+	default:
+		return fmt.Sprint(v)
+	}
 }
 
 /*
@@ -119,14 +141,13 @@ func StringToInt(val string) int {
 }
 
 func StringToInt32(val string) int32 {
-	ret, err := strconv.ParseInt(val,10,32)
+	ret, err := strconv.ParseInt(val, 10, 32)
 	if err != nil {
-		log.Println("StringToInt32 convert failed ,value is :",val)
+		log.Println("StringToInt32 convert failed ,value is :", val)
 		return 0
 	}
 	return int32(ret)
 }
-
 
 func StringToInt64(val string) int64 {
 	ret, _ := strconv.ParseInt(val, 10, 64)
@@ -144,12 +165,12 @@ func Int64ToString(val int64) string {
 }
 
 func Int32ToInt(value int32) int {
-	str :=Int64ToString(int64(value))
+	str := Int64ToString(int64(value))
 	return StringToInt(str)
 }
 
 func IntToInt32(value int) int32 {
-	str :=IntToString(value)
+	str := IntToString(value)
 	return StringToInt32(str)
 }
 
