@@ -6,7 +6,7 @@ import "github.com/geiqin/gotools/helper"
 type ResultData struct {
 	Code    int64       `json:"code"`              //错误代码: 成功：1 ，其它数字为失败
 	Message string      `json:"message,omitempty"` //错误消息
-	Data    interface{} `json:"data,omitempty"`    //成功数据
+	Data    interface{} `json:"data"`              //成功数据
 }
 
 //分页数据
