@@ -85,10 +85,7 @@ func JsonData(who interface{}, err error) string {
 		}
 	}
 	if ret.Code == 0 {
-		ret.Code = 500
-		if err == nil {
-			ret.Message = "未知错误"
-		}
+		ret.Code = 1
 	}
 	return helper.JsonEncode(ret)
 }
