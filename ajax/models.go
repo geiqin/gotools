@@ -1,7 +1,5 @@
 package ajax
 
-import "github.com/geiqin/gotools/helper"
-
 //结果数据
 type ResultData struct {
 	Code    int64       `json:"code"`              //错误代码: 成功：1 ，其它数字为失败
@@ -16,7 +14,7 @@ type PageData struct {
 }
 
 //输出错误json数据
-func Failed(message string, errCode ...int64) string {
+func Failed(message string, errCode ...int64) *ResultData {
 	var code int64 = 400
 	if errCode != nil {
 		c := errCode[0]
@@ -28,14 +26,14 @@ func Failed(message string, errCode ...int64) string {
 		Code:    code,
 		Message: message,
 	}
-	return helper.JsonEncode(ret)
+	return ret
 }
 
 //输出成功json数据
-func Succeed(data interface{}) string {
+func Succeed(data interface{}) *ResultData {
 	ret := &ResultData{
 		Code: 1,
 		Data: data,
 	}
-	return helper.JsonEncode(ret)
+	return ret
 }
