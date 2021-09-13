@@ -249,3 +249,33 @@ func StripSlashes(str string) string {
 	}
 	return string(dstRune)
 }
+
+// 数组是否包含某元素（string）
+func HasContainString(items []string, item string) bool {
+	for _, eachItem := range items {
+		if eachItem == item {
+			return true
+		}
+	}
+	return false
+}
+
+// 数组是否包含某元素（int32）
+func HasContainInt32(items []int32, item int32) bool {
+	for _, eachItem := range items {
+		if eachItem == item {
+			return true
+		}
+	}
+	return false
+}
+
+// 数组是否包含某元素（int64）
+func HasContainInt64(items []int64, item int64) bool {
+	for _, eachItem := range items {
+		if eachItem == item {
+			return true
+		}
+	}
+	return false
+}
