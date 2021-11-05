@@ -85,7 +85,7 @@ func JsonData(who interface{}, err error) string {
 				pageData.Items = items.Interface()
 			}
 		}
-		if pageData.Pager != nil {
+		if pageData.Pager != nil || pageData.Items != nil {
 			ret.Code = 1
 			ret.Data = pageData
 			return helper.JsonEncode(ret)
