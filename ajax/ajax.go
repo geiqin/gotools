@@ -31,6 +31,15 @@ func JsonData(who interface{}, err error) string {
 			}
 		}
 
+		data := elem.FieldByName("Data")
+		if data.IsValid() {
+			if !data.IsNil() {
+				ret.Code = 1
+				ret.Data = data.Interface()
+				return helper.JsonEncode(ret)
+			}
+		}
+
 		info := elem.FieldByName("Info")
 		if info.IsValid() {
 			if !info.IsNil() {
