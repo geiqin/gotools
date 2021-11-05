@@ -10,6 +10,8 @@ type ResultData struct {
 //结果数据
 type OldResultData struct {
 	Entity interface{} `json:"entity,omitempty"` //单实体
+	Pager  interface{} `json:"pager,omitempty"`  //分页
+	Items  interface{} `json:"items,omitempty"`  //列表
 	Params interface{} `json:"params,omitempty"` //参数
 	Info   interface{} `json:"info,omitempty"`   //消息
 }

@@ -90,11 +90,14 @@ func JsonData(who interface{}, err error) string {
 			ret.Data = pageData
 			return helper.JsonEncode(ret)
 		}
-		if pageData.Pager == nil && pageData.Items != nil {
-			ret.Code = 1
-			ret.Data = pageData.Items
-			return helper.JsonEncode(ret)
-		}
+
+		/*
+			if pageData.Pager == nil && pageData.Items != nil {
+				ret.Code = 1
+				ret.Data = pageData.Items
+				return helper.JsonEncode(ret)
+			}
+		*/
 	}
 	if ret.Code == 0 {
 		ret.Code = 1
