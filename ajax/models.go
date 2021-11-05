@@ -7,6 +7,13 @@ type ResultData struct {
 	Data    interface{} `json:"data"`              //成功数据
 }
 
+//结果数据
+type OldResultData struct {
+	Entity interface{} `json:"entity,omitempty"` //单实体
+	Params interface{} `json:"params,omitempty"` //参数
+	Info   interface{} `json:"info,omitempty"`   //消息
+}
+
 //分页数据
 type PageData struct {
 	Pager interface{} `json:"pager"`

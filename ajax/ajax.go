@@ -44,7 +44,8 @@ func JsonData(who interface{}, err error) string {
 		if info.IsValid() {
 			if !info.IsNil() {
 				ret.Code = 1
-				ret.Data = info.Interface()
+				//ret.Data = info.Interface()
+				ret.Data = &OldResultData{Info: info.Interface()}
 				return helper.JsonEncode(ret)
 			}
 		}
@@ -53,7 +54,8 @@ func JsonData(who interface{}, err error) string {
 		if entity.IsValid() {
 			if !entity.IsNil() {
 				ret.Code = 1
-				ret.Data = entity.Interface()
+				//ret.Data = entity.Interface()
+				ret.Data = &OldResultData{Entity: entity.Interface()}
 				return helper.JsonEncode(ret)
 			}
 		}
@@ -62,7 +64,8 @@ func JsonData(who interface{}, err error) string {
 		if params.IsValid() {
 			if !params.IsNil() {
 				ret.Code = 1
-				ret.Data = params.Interface()
+				//ret.Data = params.Interface()
+				ret.Data = &OldResultData{Params: params.Interface()}
 				return helper.JsonEncode(ret)
 			}
 		}
