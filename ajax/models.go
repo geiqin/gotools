@@ -18,7 +18,7 @@ type OldResultData struct {
 
 //分页数据
 type PageData struct {
-	Pager interface{} `json:"pager"`
+	Pager interface{} `json:"pager,omitempty"`
 	Items interface{} `json:"items"`
 }
 
