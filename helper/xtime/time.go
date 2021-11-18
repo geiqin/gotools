@@ -3,7 +3,6 @@ package xtime
 import (
 	"fmt"
 	"github.com/pkg/errors"
-	"log"
 	"strconv"
 	"strings"
 	"time"
@@ -21,6 +20,95 @@ const (
 	SecondType TimeType = 6
 )
 
+const (
+	BINano  = "2006-01-02 15:04:05.000000000"
+	BIMicro = "2006-01-02 15:04:05.000000"
+	BIMil   = "2006-01-02 15:04:05.000"
+	BISec   = "2006-01-02 15:04:05"
+	BICST   = "2006-01-02 15:04:05 +0800 CST"
+	BIUTC   = "2006-01-02 15:04:05 +0000 UTC"
+	BIDate  = "2006-01-02"
+	BITime  = "15:04:05"
+)
+
+// 时间字符串转时间
+func TimeStr2Time(str string) (time.Time, error) {
+	return TimeStr2TimeBasic(str, "", nil)
+}
+
+// 时间字符串转时间戳
+func TimeStr2Timestamp(str string) (int64, error) {
+	return TimeStr2TimestampBasic(str, "", nil)
+}
+
+// 时间戳转时间 秒
+func Timestamp2TimeSec(stamp int64) time.Time {
+	return Timestamp2Time(stamp, 0)
+}
+
+// base...
+func TimeStr2TimeBasic(value string, resultFormat string, resultLoc *time.Location) (time.Time, error) {
+	/**
+	  - params
+	      value:             转换内容字符串
+	      resultFormat:    结果时间格式
+	      resultLoc:        结果时区
+	*/
+	resultLoc = getLocationDefault(resultLoc)
+	useFormat := []string{ // 可能的转换格式
+		BINano, BIMicro, BIMil, BISec, BICST, BIUTC, BIDate, BITime,
+		time.RFC3339,
+		time.RFC3339Nano,
+	}
+	var t time.Time
+	for _, usef := range useFormat {
+		tt, error := time.ParseInLocation(usef, value, resultLoc)
+		t = tt
+		if error != nil {
+			continue
+		}
+		break
+	}
+	if t == getTimeDefault(resultLoc) {
+		return t, errors.New("时间字符串格式错误")
+	}
+
+	if resultFormat == "" {
+		resultFormat = "2006-01-02 15:04:05"
+	}
+	st := t.Format(resultFormat)
+	fixedt, _ := time.ParseInLocation(resultFormat, st, resultLoc)
+
+	return fixedt, nil
+}
+
+func TimeStr2TimestampBasic(str string, format string, loc *time.Location) (int64, error) {
+	t, err := TimeStr2TimeBasic(str, format, loc)
+	if err != nil {
+		return -1., err
+	}
+	return (int64(t.UnixNano()) * 1) / 1e9, nil
+}
+
+func Timestamp2Time(stamp int64, nsec int64) time.Time {
+	return time.Unix(stamp, nsec)
+}
+
+// 获取time默认值, 造一个错误
+func getTimeDefault(loc *time.Location) time.Time {
+	loc = getLocationDefault(loc)
+	t, _ := time.ParseInLocation("2006-01-02 15:04:05", "", loc)
+	return t
+}
+
+func getLocationDefault(loc *time.Location) *time.Location {
+	if loc == nil {
+		loc, _ = time.LoadLocation("Local")
+	}
+	return loc
+}
+
+/*
 //时间字符串转换成时间
 func ParseStrToTime(timeStr string, flag int) time.Time {
 	var t time.Time
@@ -44,6 +132,8 @@ func ParseStrToTime(timeStr string, flag int) time.Time {
 	}
 	return t
 }
+
+*/
 
 /**
   获取多少天,多少月或者多少年之前或之后的时间
