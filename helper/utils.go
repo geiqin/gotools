@@ -13,6 +13,15 @@ import (
 	"time"
 )
 
+//结构转换，包括数组结构
+func ConvertData(from interface{}, to interface{}) interface{} {
+	json := JsonEncode(from)
+	if json != "" {
+		JsonDecode(json, &to)
+	}
+	return to
+}
+
 func GetVal(name string, mps map[string]interface{}) interface{} {
 	v, ok := mps[name]
 	if !ok {
