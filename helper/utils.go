@@ -14,12 +14,12 @@ import (
 )
 
 //结构转换，包括数组结构
-func ConvertData(from interface{}, to interface{}) interface{} {
-	json := JsonEncode(from)
+func ConvertData(dst interface{}, src interface{}) interface{} {
+	json := JsonEncode(src)
 	if json != "" {
-		JsonDecode(json, &to)
+		JsonDecode(json, &dst)
 	}
-	return to
+	return dst
 }
 
 func GetVal(name string, mps map[string]interface{}) interface{} {
