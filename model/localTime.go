@@ -5,7 +5,6 @@ import (
 	"time"
 )
 
-
 const TimeFormat = "2006-01-02 15:04:05"
 
 type LocalTime time.Time
@@ -34,6 +33,11 @@ func (t LocalTime) Value() (driver.Value, error) {
 		return nil, nil
 	}
 	return []byte(time.Time(t).Format(TimeFormat)), nil
+}
+
+func (t *LocalTime) SetTime(tTime time.Time) error {
+	*t = LocalTime(tTime)
+	return nil
 }
 
 func (t *LocalTime) Scan(v interface{}) error {
