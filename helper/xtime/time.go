@@ -2,6 +2,7 @@ package xtime
 
 import (
 	"fmt"
+	"github.com/geiqin/gotools/model"
 	"github.com/pkg/errors"
 	"strconv"
 	"strings"
@@ -30,6 +31,17 @@ const (
 	BIDate  = "2006-01-02"
 	BITime  = "15:04:05"
 )
+
+// 时间字符串转时间
+func ToLocalTime(str string) (model.LocalTime, error) {
+	lt := &model.LocalTime{}
+	t, err := TimeStr2Time(str)
+	if err != nil {
+		return *lt, err
+	}
+	lt.SetTime(t)
+	return *lt, nil
+}
 
 // 时间字符串转时间
 func TimeStr2Time(str string) (time.Time, error) {
