@@ -48,9 +48,8 @@ func (t LocalTime) String() string {
 // *****EXTEND*****
 
 //set time for localTime
-func (t *LocalTime) SetTime(tTime time.Time) error {
+func (t *LocalTime) SetTime(tTime time.Time) {
 	*t = LocalTime(tTime)
-	return nil
 }
 
 func (t LocalTime) Year() int {
