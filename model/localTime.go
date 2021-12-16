@@ -35,11 +35,6 @@ func (t LocalTime) Value() (driver.Value, error) {
 	return []byte(time.Time(t).Format(TimeFormat)), nil
 }
 
-func (t *LocalTime) SetTime(tTime time.Time) error {
-	*t = LocalTime(tTime)
-	return nil
-}
-
 func (t *LocalTime) Scan(v interface{}) error {
 	tTime, _ := time.Parse("2006-01-02 15:04:05 +0800 CST", v.(time.Time).String())
 	*t = LocalTime(tTime)
@@ -48,4 +43,88 @@ func (t *LocalTime) Scan(v interface{}) error {
 
 func (t LocalTime) String() string {
 	return time.Time(t).Format(TimeFormat)
+}
+
+// *****EXTEND*****
+
+//set time for localTime
+func (t *LocalTime) SetTime(tTime time.Time) error {
+	*t = LocalTime(tTime)
+	return nil
+}
+
+func (t LocalTime) Year() int {
+	return time.Time(t).Year()
+}
+
+func (t LocalTime) Month() time.Month {
+	return time.Time(t).Month()
+}
+
+func (t LocalTime) Day() int {
+	return time.Time(t).Day()
+}
+
+func (t LocalTime) Hour() int {
+	return time.Time(t).Hour()
+}
+func (t LocalTime) Second() int {
+	return time.Time(t).Second()
+}
+
+func (t LocalTime) Minute() int {
+	return time.Time(t).Minute()
+}
+
+func (t LocalTime) Unix() int64 {
+	return time.Time(t).Unix()
+}
+
+func (t LocalTime) UnixNano() int64 {
+	return time.Time(t).UnixNano()
+}
+
+func (t LocalTime) GetTime() time.Time {
+	return time.Time(t)
+}
+
+func (t LocalTime) Add(d time.Duration) time.Time {
+	return time.Time(t).Add(d)
+}
+
+//添加天数
+func (t LocalTime) AddDay(day int) time.Time {
+	var dur time.Duration = time.Duration(day) * 24 * time.Hour
+	return time.Time(t).Add(dur)
+}
+
+//添加小时
+func (t LocalTime) AddHour(hour int) time.Time {
+	var dur time.Duration = time.Duration(hour) * time.Hour
+	return time.Time(t).Add(dur)
+}
+
+//添加分钟
+func (t LocalTime) AddMinute(minute int) time.Time {
+	var dur time.Duration = time.Duration(minute) * time.Minute
+	return time.Time(t).Add(dur)
+}
+
+// After reports whether the time instant t is after u.
+func (t LocalTime) After(u time.Time) bool {
+	return time.Time(t).After(u)
+}
+
+// Before reports whether the time instant t is before u.
+func (t LocalTime) Before(u time.Time) bool {
+	return time.Time(t).Before(u)
+}
+
+// Equal reports whether t and u represent the same time instant.
+// Two times can be equal even if they are in different locations.
+// For example, 6:00 +0200 and 4:00 UTC are Equal.
+// See the documentation on the Time type for the pitfalls of using == with
+// Time values; most code should use Equal instead.
+func (t LocalTime) Equal(u time.Time) bool {
+	return time.Time(t).Equal(u)
 }
