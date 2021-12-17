@@ -103,10 +103,21 @@ func (t LocalTime) Add(d time.Duration) time.Time {
 	return time.Time(t).Add(d)
 }
 
+// AddDate returns the time corresponding to adding the
+// given number of years, months, and days to t.
+// For example, AddDate(-1, 2, 3) applied to January 1, 2011
+// returns March 4, 2010.
+//
+// AddDate normalizes its result in the same way that Date does,
+// so, for example, adding one month to October 31 yields
+// December 1, the normalized form for November 31.
+func (t LocalTime) AddDate(years int, months int, days int) time.Time {
+	return time.Time(t).AddDate(years, months, days)
+}
+
 //添加天数
-func (t LocalTime) AddDay(day int) time.Time {
-	var dur time.Duration = time.Duration(day) * 24 * time.Hour
-	return time.Time(t).Add(dur)
+func (t LocalTime) AddDay(days int) time.Time {
+	return time.Time(t).AddDate(0, 0, days)
 }
 
 //添加小时
