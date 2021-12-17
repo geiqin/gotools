@@ -99,8 +99,8 @@ func (t LocalTime) GetTimeOfDate() time.Time {
 	return t.GetTime()
 }
 
-func (t LocalTime) Add(d time.Duration) time.Time {
-	return time.Time(t).Add(d)
+func (t LocalTime) Add(d time.Duration) LocalTime {
+	return LocalTime(time.Time(t).Add(d))
 }
 
 // AddDate returns the time corresponding to adding the
@@ -111,25 +111,25 @@ func (t LocalTime) Add(d time.Duration) time.Time {
 // AddDate normalizes its result in the same way that Date does,
 // so, for example, adding one month to October 31 yields
 // December 1, the normalized form for November 31.
-func (t LocalTime) AddDate(years int, months int, days int) time.Time {
-	return time.Time(t).AddDate(years, months, days)
+func (t LocalTime) AddDate(years int, months int, days int) LocalTime {
+	return LocalTime(time.Time(t).AddDate(years, months, days))
 }
 
 //添加天数
-func (t LocalTime) AddDay(days int) time.Time {
-	return time.Time(t).AddDate(0, 0, days)
+func (t LocalTime) AddDay(days int) LocalTime {
+	return LocalTime(time.Time(t).AddDate(0, 0, days))
 }
 
 //添加小时
-func (t LocalTime) AddHour(hour int) time.Time {
+func (t LocalTime) AddHour(hour int) LocalTime {
 	var dur time.Duration = time.Duration(hour) * time.Hour
-	return time.Time(t).Add(dur)
+	return LocalTime(time.Time(t).Add(dur))
 }
 
 //添加分钟
-func (t LocalTime) AddMinute(minute int) time.Time {
+func (t LocalTime) AddMinute(minute int) LocalTime {
 	var dur time.Duration = time.Duration(minute) * time.Minute
-	return time.Time(t).Add(dur)
+	return LocalTime(time.Time(t).Add(dur))
 }
 
 // After reports whether the time instant t is after u.
