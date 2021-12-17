@@ -83,8 +83,20 @@ func (t LocalTime) UnixNano() int64 {
 	return time.Time(t).UnixNano()
 }
 
+//获取时间
+//timeType值为1时只取年,
+//timeType值为2时只取年和月,
+//timeType值为3时取只年和月和日,
+
 func (t LocalTime) GetTime() time.Time {
 	return time.Time(t)
+}
+
+//获取时间 年-月-日
+func (t LocalTime) GetTimeOfDate() time.Time {
+	timeStr := time.Time(t).Format("2006-01-02")
+	t.Scan(timeStr)
+	return t.GetTime()
 }
 
 func (t LocalTime) Add(d time.Duration) time.Time {
