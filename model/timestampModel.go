@@ -6,8 +6,8 @@ import (
 )
 
 type Timestamps struct {
-	CreatedAt LocalTime `json:"created_at" gorm:"type:datetime"`
-	UpdatedAt LocalTime `json:"updated_at" gorm:"type:datetime"`
+	CreatedAt LocalTime `json:"created_at" gorm:"type:datetime;autoCreateTime"`
+	UpdatedAt LocalTime `json:"updated_at" gorm:"type:datetime;autoUpdateTime"`
 }
 
 type DelTimestamps struct {
