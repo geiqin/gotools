@@ -88,9 +88,9 @@ func (t LocalTime) Weekday() time.Weekday {
 }
 
 //获取时间
-//timeType值为1时只取年,
-//timeType值为2时只取年和月,
-//timeType值为3时取只年和月和日,
+//timeType值为 1时只取年,
+//timeType值为 2时只取年和月,
+//timeType值为 3时取只年和月和日,
 
 func (t LocalTime) GetTime() time.Time {
 	return time.Time(t)
