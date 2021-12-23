@@ -96,6 +96,18 @@ func (t LocalTime) GetTime() time.Time {
 	return time.Time(t)
 }
 
+//获取年月日 （年-月-日）
+func (t LocalTime) GetYearMonthDay(val time.Time) string {
+	timeStr := time.Time(t).Format("2006-01-02")
+	return timeStr
+}
+
+//获取时分秒 （时:分:秒）
+func (t LocalTime) GetHourMinuteSecond(val time.Time) string {
+	timeStr := time.Time(t).Format("15:04:05")
+	return timeStr
+}
+
 //获取时间 年-月-日
 func (t LocalTime) GetTimeOfDate() time.Time {
 	timeStr := time.Time(t).Format("2006-01-02")
