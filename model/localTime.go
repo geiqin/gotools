@@ -83,6 +83,10 @@ func (t LocalTime) UnixNano() int64 {
 	return time.Time(t).UnixNano()
 }
 
+func (t LocalTime) Weekday() time.Weekday {
+	return time.Time(t).Weekday()
+}
+
 //获取时间
 //timeType值为1时只取年,
 //timeType值为2时只取年和月,
