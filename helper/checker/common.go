@@ -2,11 +2,11 @@ package checker
 
 import "regexp"
 
-//数字+字母  不限制大小写 6~30位
+//数字+字母  不限制大小写 4~30位
 func IsID(str ...string) bool {
 	var b bool
 	for _, s := range str {
-		b, _ = regexp.MatchString("^[0-9a-zA-Z]{6,30}$", s)
+		b, _ = regexp.MatchString("^[0-9a-zA-Z]{4,30}$", s)
 		if false == b {
 			return b
 		}
