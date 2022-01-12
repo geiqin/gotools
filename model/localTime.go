@@ -158,6 +158,10 @@ func (t LocalTime) Before(u time.Time) bool {
 	return time.Time(t).Before(u)
 }
 
+func (t LocalTime) Sub(d time.Time) time.Duration {
+	return time.Time(t).Sub(d)
+}
+
 // Equal reports whether t and u represent the same time instant.
 // Two times can be equal even if they are in different locations.
 // For example, 6:00 +0200 and 4:00 UTC are Equal.
