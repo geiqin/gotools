@@ -8,6 +8,7 @@ import (
 	"log"
 	"math/rand"
 	"reflect"
+	"sort"
 	"strconv"
 	"strings"
 	"time"
@@ -296,6 +297,35 @@ func HasURL(str string) bool {
 		return true
 	}
 	return false
+}
+
+//去重（int数组）
+func RemoveDuplicateInt(nums []int) []int {
+	for i := 0; i+1 < len(nums); {
+		if nums[i] == nums[i+1] {
+			nums = append(nums[:i], nums[i+1:]...)
+		} else {
+			i++
+		}
+	}
+	return nums
+}
+
+//去重（字符串数组）
+func RemoveDuplicateStr(slice []string) []string {
+	sort.Strings(slice)
+	i := 0
+	var j int
+	for {
+		if i >= len(slice)-1 {
+			break
+		}
+		for j = i + 1; j < len(slice) && slice[i] == slice[j]; j++ {
+		}
+		slice = append(slice[:i+1], slice[j:]...)
+		i++
+	}
+	return slice
 }
 
 /**
