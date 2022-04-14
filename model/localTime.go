@@ -48,7 +48,7 @@ func (t LocalTime) String() string {
 // *****EXTEND*****
 
 //获取当前时间
-func (t LocalTime) Now() LocalTime {
+func Now() LocalTime {
 	return LocalTime(time.Now())
 }
 
