@@ -4,7 +4,6 @@ import (
 	"errors"
 	"fmt"
 	"github.com/mitchellh/mapstructure"
-	"github.com/shomali11/util/xhashes"
 	"log"
 	"math/rand"
 	"reflect"
@@ -38,13 +37,23 @@ func GetIdentityFlag(id int64, prefix string, suffix string) string {
 	return flag
 }
 
-func GenerateSn(prefix ...string) string {
-	sn := xhashes.FNV64(UniqueId())
-	snStr := strconv.FormatUint(sn, 10)
+//生成订单编号
+func GenerateSn(userId int64, prefix ...string) string {
+	flagUsr := fmt.Sprintf("%05d", userId)
+	flagUsr = flagUsr[len(flagUsr)-2:]
+	timestamp := time.Now().UnixNano()
+	timestampStr := ToString(timestamp)
+	flagEnd := timestampStr[len(timestampStr)-2:]
+	rand.Seed(timestamp)
+	flagRnd := rand.Intn(100)
+	flagRndStr := fmt.Sprintf("%02d", flagRnd)
+	// 时间转换格式
+	beforeTimeS := time.Now().Unix() // 秒时间戳
+	beforeDate := time.Unix(beforeTimeS, 0).Format("20060102150405")
 	if prefix != nil {
-		snStr = prefix[0] + snStr
+		return prefix[0] + beforeDate + flagEnd + flagUsr + flagRndStr
 	}
-	return snStr
+	return beforeDate + flagEnd + flagUsr + flagRndStr
 }
 
 //获取随机数字串（验证码常用）
