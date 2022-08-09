@@ -13,6 +13,28 @@ import (
 	"time"
 )
 
+//生成树Path值
+func MakeDeptPath(id int32, parentId int32, parentPath string) string {
+	deptPath := ToString(id) + "/"
+	if parentId != 0 {
+		deptPath = parentPath + deptPath
+	} else {
+		deptPath = "/0/" + deptPath
+	}
+	return deptPath
+}
+
+//生成树Path值(int64)
+func MakeDeptPathInt64(id int64, parentId int64, parentPath string) string {
+	deptPath := ToString(id) + "/"
+	if parentId != 0 {
+		deptPath = parentPath + deptPath
+	} else {
+		deptPath = "/0/" + deptPath
+	}
+	return deptPath
+}
+
 //结构转换，包括数组结构
 func ConvertData(dst interface{}, src interface{}) interface{} {
 	json := JsonEncode(src)
