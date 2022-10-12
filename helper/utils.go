@@ -13,6 +13,39 @@ import (
 	"time"
 )
 
+// StrPad
+// input string 原字符串
+// padLength int 规定补齐后的字符串位数
+// padString string 自定义填充字符串
+// padType string 填充类型:LEFT(向左填充,自动补齐位数), 默认右侧
+func StrPad(input string, padLength int, padString string, padType ...string) string {
+
+	output := ""
+	inputLen := len(input)
+
+	if inputLen >= padLength {
+		return input
+	}
+
+	padStringLen := len(padString)
+	needFillLen := padLength - inputLen
+
+	if diffLen := padStringLen - needFillLen; diffLen > 0 {
+		padString = padString[diffLen:]
+	}
+
+	for i := 1; i <= needFillLen; i += padStringLen {
+		output += padString
+	}
+
+	if padType != nil {
+		if strings.ToLower(padType[0]) == "left" {
+			return output + input
+		}
+	}
+	return input + output
+}
+
 //生成树Path值
 func MakeDeptPath(id int32, parentId int32, parentPath string) string {
 	deptPath := ToString(id) + "/"
