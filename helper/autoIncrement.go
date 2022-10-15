@@ -66,7 +66,19 @@ func (b *AutoIncrement) MakeNewId(currentMaxId int64) (int64, error) {
 		currentMaxId = StringToInt64(currentMaxIdStr)
 		autoFlag = fmt.Sprintf("%d", currentMaxId+1)
 	} else {
-		autoFlag = fmt.Sprintf("%d%02d", b.shortParentId, 1)
+		sufLen :=len(b.suffixStr)
+		switch sufLen {
+		case 1:
+			autoFlag = fmt.Sprintf("%d%01d", b.shortParentId, 1)
+		case 2:
+			autoFlag = fmt.Sprintf("%d%02d", b.shortParentId, 1)
+		case 3:
+			autoFlag = fmt.Sprintf("%d%03d", b.shortParentId, 1)
+		case 4:
+			autoFlag = fmt.Sprintf("%d%04d", b.shortParentId, 1)
+		case 5:
+			autoFlag = fmt.Sprintf("%d%05d", b.shortParentId, 1)
+		}
 	}
 
 	autoFlag = StrPad(autoFlag, b.padLength, "0") //不足8位末尾补0
