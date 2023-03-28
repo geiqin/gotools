@@ -5,21 +5,12 @@ import (
 )
 
 type Paginator struct {
-	Paged     int64
-	Total     int64
-	PageCount int64
-	PageSize  int64
-	PrevPage  int64
-	LastPage  int64
-}
-
-type paginatorWrap struct {
-	Paged     int32
-	Total     int32
-	PageCount int32
-	PageSize  int32
-	PrevPage  int32
-	LastPage  int32
+	Paged     int64 `json:"paged,omitempty"`
+	Total     int64 `json:"total,omitempty"`
+	PageCount int64 `json:"page_count,omitempty"`
+	PageSize  int64 `json:"page_size,omitempty"`
+	PrevPage  int64 `json:"prev_page,omitempty"`
+	LastPage  int64 `json:"last_page,omitempty"`
 }
 
 func New(paged int32, pageSize ...int32) *Paginator {
@@ -54,17 +45,7 @@ func NewFromInt(paged int64, pageSize ...int64) *Paginator {
 }
 
 func (a *Paginator) Offset() int {
-	a.calculate()
-	var offset int64
-	p := a.Paged - 1
-	if p >= a.PageCount {
-		offset = (a.PageCount - 1) * a.PageSize
-	} else {
-		offset = (a.Paged - 1) * a.PageSize
-	}
-	if offset < 0 {
-		offset = 0
-	}
+	offset := (a.Paged - 1) * a.PageSize
 	return helper.StringToInt(helper.ToString(offset))
 }
 
