@@ -5,41 +5,20 @@ import (
 )
 
 type Paginator struct {
-	Paged     int64 `json:"paged,omitempty"`
-	Total     int64 `json:"total,omitempty"`
-	PageCount int64 `json:"page_count,omitempty"`
-	PageSize  int64 `json:"page_size,omitempty"`
-	PrevPage  int64 `json:"prev_page,omitempty"`
-	LastPage  int64 `json:"last_page,omitempty"`
+	Paged     int64 `json:"paged"`
+	Total     int64 `json:"total"`
+	PageCount int64 `json:"page_count"`
+	PageSize  int64 `json:"page_size"`
+	PrevPage  int64 `json:"prev_page"`
+	LastPage  int64 `json:"last_page"`
 }
 
 func New(paged int32, pageSize ...int32) *Paginator {
-	p, _ := helper.ToInt64(paged)
+	entity := &Paginator{}
+	entity.Paged, _ = helper.ToInt64(paged)
 	if pageSize != nil {
 		s, _ := helper.ToInt64(pageSize[0])
-		return NewFromInt(p, s)
-	}
-	return NewFromInt(p)
-}
-
-func NewFromInt(paged int64, pageSize ...int64) *Paginator {
-	var psize int64
-	if pageSize != nil {
-		if pageSize[0] > 0 {
-			psize = pageSize[0]
-		}
-	}
-	if paged < 1 {
-		paged = 1
-	}
-
-	if psize < 1 {
-		psize = 20
-	}
-
-	entity := &Paginator{
-		PageSize: psize,
-		Paged:    paged,
+		entity.PageSize = s
 	}
 	return entity
 }
@@ -54,6 +33,12 @@ func (a *Paginator) Limit() int {
 }
 
 func (a *Paginator) calculate() {
+	if a.Paged < 1 {
+		a.Paged = 1
+	}
+	if a.PageSize <= 0 {
+		a.PageSize = 20
+	}
 	a.PageCount = (a.Total + a.PageSize - 1) / a.PageSize
 	a.LastPage = a.Paged + 1
 	a.PrevPage = a.Paged - 1
