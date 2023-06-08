@@ -13,16 +13,6 @@ type Paginator struct {
 	LastPage  int64 `json:"last_page"`
 }
 
-func NewInt32(paged int32, pageSize ...int32) *Paginator {
-	entity := &Paginator{}
-	entity.Paged, _ = helper.ToInt64(paged)
-	if pageSize != nil {
-		s, _ := helper.ToInt64(pageSize[0])
-		entity.PageSize = s
-	}
-	return entity
-}
-
 func New(paged int64, pageSize ...int64) *Paginator {
 	entity := &Paginator{}
 	entity.Paged = paged
