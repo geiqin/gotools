@@ -29,6 +29,7 @@ func New(paged int64, pageSize ...int64) *Paginator {
 	if pageSize != nil {
 		entity.PageSize = pageSize[0]
 	}
+	entity.calculate()
 	return entity
 }
 
