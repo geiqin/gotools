@@ -467,3 +467,11 @@ func GetQuarterDay() (string, string) {
 	}
 	return firstOfQuarter, lastOfQuarter
 }
+
+//生成商品规格Md5Key值
+func MakeSpecMd5Key(spuId int64, specValues []string) string {
+	if specValues != nil {
+		return MD5(ToString(spuId) + "_" + strings.Join(specValues, ","))
+	}
+	return MD5(ToString(spuId))
+}
