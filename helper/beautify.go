@@ -5,7 +5,7 @@ import (
 	"github.com/geiqin/gotools/helper/xtime"
 )
 
-//美化时间
+//美化时间(如: YYYY-MM-DD hh:mm)
 func BeautifyTime(strTime string, format string) string {
 	if strTime == "" {
 		return ""
