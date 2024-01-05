@@ -12,6 +12,7 @@ func JsonData(who interface{}, err error) string {
 
 	if err != nil {
 		ret.Code = 400
+		ret.Msg = err.Error()
 		ret.Message = err.Error()
 	}
 
@@ -27,6 +28,7 @@ func JsonData(who interface{}, err error) string {
 				msg := errElem.FieldByName("Message")
 				ret.Code = code.Int()
 				ret.Message = msg.String()
+				ret.Msg = msg.String()
 				return helper.JsonEncode(ret)
 			}
 		}
@@ -36,6 +38,13 @@ func JsonData(who interface{}, err error) string {
 			if !data.IsNil() {
 				ret.Code = 1
 				ret.Data = data.Interface()
+				//映射msg到顶层
+				dataElem := data.Elem()
+				msg := dataElem.FieldByName("Msg")
+				if msg.IsValid() {
+					//msg.Elem().SetString("")
+					ret.Msg = msg.String()
+				}
 				return helper.JsonEncode(ret)
 			}
 		}
