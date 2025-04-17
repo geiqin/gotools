@@ -13,9 +13,13 @@ func (e *CommonError) Error() string {
 	return fmt.Sprintf("Error Code: %d, Message: %s", e.ErrCode, e.Message)
 }
 
-func NewCommonError(errMsg string, errCode int32) error {
+func NewCommonError(errMsg string, errCode ...int32) error {
+	var errorCode int32 = 100 //普通错误
+	if errCode != nil {
+		errorCode = errCode[0]
+	}
 	return &CommonError{
-		ErrCode: errCode,
+		ErrCode: errorCode,
 		Message: errMsg,
 	}
 }
