@@ -225,6 +225,18 @@ func IntToInt32(value int) int32 {
 	return StringToInt32(str)
 }
 
+// 将字符串型转bool
+func ToBool(val string) bool {
+	val = strings.ToLower(val)
+	if val == "true" {
+		return true
+	}
+	if val == "1" {
+		return true
+	}
+	return false
+}
+
 // 将任意类型转string
 func ToString(v interface{}) string {
 	if v == nil {

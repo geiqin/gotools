@@ -13,7 +13,6 @@ func JsonData(who interface{}, err error) string {
 	if err != nil {
 		ret.Code = 400
 		ret.Msg = err.Error()
-		ret.Message = err.Error()
 	}
 
 	obj := reflect.ValueOf(who)
@@ -27,7 +26,6 @@ func JsonData(who interface{}, err error) string {
 				code := errElem.FieldByName("Code")
 				msg := errElem.FieldByName("Message")
 				ret.Code = code.Int()
-				ret.Message = msg.String()
 				ret.Msg = msg.String()
 				return helper.JsonEncode(ret)
 			}
