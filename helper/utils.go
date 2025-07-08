@@ -237,6 +237,15 @@ func ToBool(val string) bool {
 	return false
 }
 
+// 将bool型转数据库储存值（0为false，1为true）
+func BoolToDBValue(val bool) string {
+	if val {
+		return "1"
+	} else {
+		return "0"
+	}
+}
+
 // 将任意类型转string
 func ToString(v interface{}) string {
 	if v == nil {
