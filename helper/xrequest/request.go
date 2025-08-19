@@ -56,6 +56,26 @@ func GetRoutineType(ctx context.Context) string {
 	return ""
 }
 
+//是否微信小程序（基于RoutineType）
+func IsMPWeixin(ctx context.Context) bool {
+	return strings.ToUpper(GetRoutineType(ctx)) == "MP-WEIXIN"
+}
+
+//是否支付宝小程序（基于RoutineType）
+func IsMPAlipay(ctx context.Context) bool {
+	return strings.ToUpper(GetRoutineType(ctx)) == "MP-ALIPAY"
+}
+
+//是否头条小程序（基于RoutineType）
+func IsMPToutiao(ctx context.Context) bool {
+	return strings.ToUpper(GetRoutineType(ctx)) == "MP-TOUTIAO"
+}
+
+//是否百度小程序（基于RoutineType）
+func IsMPBaidu(ctx context.Context) bool {
+	return strings.ToUpper(GetRoutineType(ctx)) == "MP-BAIDU"
+}
+
 //是否微信环境 （基于UserAgent）
 func IsWeixinEnv(ctx context.Context) bool {
 	userAgent := GetHttpUserAgent(ctx)
