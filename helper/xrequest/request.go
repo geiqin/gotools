@@ -6,6 +6,29 @@ import (
 	"strings"
 )
 
+//来源类型
+type FromType string
+
+const (
+	FromTypeApp     FromType = "app"     //APP
+	FromTypePc      FromType = "pc"      //PC
+	FromTypeH5      FromType = "h5"      //H5
+	FromTypeRoutine FromType = "routine" //小程序
+	FromTypeWechat  FromType = "wechat"  //微信
+	FromTypeCashier FromType = "cashier" //收银台
+)
+
+//小程序类型
+type RoutineType string
+
+const (
+	RoutineTypeWeixin   RoutineType = "MP-WEIXIN"   //微信小程序
+	RoutineTypeAlipay   RoutineType = "MP-ALIPAY"   //支付宝小程序
+	RoutineTypeBaidu    RoutineType = "MP-BAIDU"    //百度小程序
+	RoutineTypeTouTiao  RoutineType = "MP-TOUTIAO"  //头条小程序
+	RoutineTypeKuaiShou RoutineType = "MP-KUAISHOU" //快手小程序
+)
+
 //获得来源类型
 func GetFromType(ctx context.Context) string {
 	val := ctx.Value("From-Type")
