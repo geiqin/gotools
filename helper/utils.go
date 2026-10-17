@@ -3,7 +3,6 @@ package helper
 import (
 	"errors"
 	"fmt"
-	"github.com/mitchellh/mapstructure"
 	"log"
 	"math/rand"
 	"reflect"
@@ -11,7 +10,18 @@ import (
 	"strconv"
 	"strings"
 	"time"
+
+	"github.com/geiqin/gotools/model"
+	"github.com/mitchellh/mapstructure"
 )
+
+func ToDbBool(val bool) model.DbBool {
+	if val {
+		return 1
+	} else {
+		return 2
+	}
+}
 
 // StrPad
 // input string 原字符串
