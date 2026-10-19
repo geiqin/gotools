@@ -8,3 +8,10 @@ func (b DbBool) MarshalJSON() ([]byte, error) {
 	}
 	return []byte("false"), nil
 }
+
+func (b DbBool) GetBool() bool {
+	if b == 1 {
+		return true
+	}
+	return false
+}
