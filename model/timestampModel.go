@@ -4,6 +4,7 @@ import (
 	"gorm.io/gorm"
 )
 
+// Timestamps Time
 type Timestamps struct {
 	UpdatedAt int64 `json:"updatedAt" gorm:"autoUpdateTime:milli;comment:创建时间"` //创建时间
 	CreatedAt int64 `json:"createdAt" gorm:"autoCreateTime:milli;comment:修改时间"` //修改时间
